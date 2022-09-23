@@ -12,7 +12,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from config import vivino
+from .config import vivino
 
 # inner module
 # import config
@@ -113,6 +113,9 @@ def scraping(web):
     driver.quit()
 
     return df
+
+def scraping_detail():
+    
 
 
 if __name__ == "__main__":
