@@ -1,10 +1,16 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+
 import re
 import time
 import random
 import pandas as pd
 from tqdm import tqdm
 
-import selenium
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
@@ -14,8 +20,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from config import vivino
 
-# inner module
-# import config
 
 
 def selenium_driver(web_disabled=False):
@@ -36,7 +40,7 @@ def selenium_driver(web_disabled=False):
     return driver
 
 
-def scraping(web):
+def scraping_href(web):
     driver = selenium_driver(web_disabled=False)
 
     # 응답 딜레이 대기
@@ -59,9 +63,6 @@ def scraping(web):
     wine_price_max = driver.find_element(
         by=By.CSS_SELECTOR, value=web["wine_price_max_path"]
     )
-
-    # if wine_type.is_selected():
-    #     wine_type.click()
 
     if not wine_review.is_selected():
         wine_review.click()
@@ -107,7 +108,7 @@ def scraping(web):
 
     df = pd.DataFrame(data)
 
-    df.to_csv("vivino_href.csv", index=False)
+    df.to_csv(BASE_DIR / "data/vivino/vivino_href.csv", index=False)
 
     time.sleep(20)
     driver.quit()
@@ -115,6 +116,12 @@ def scraping(web):
     return df
 
 
+def scraping_detail():
+    pass
+
+
 if __name__ == "__main__":
-    df = scraping(vivino)
-    print(df)
+    a = 1
+    print(BASE_DIR)
+    # df = scraping_href(vivino)
+    # print(df)
