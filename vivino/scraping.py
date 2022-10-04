@@ -21,7 +21,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from config import vivino
 
 
-
 def selenium_driver(web_disabled=False):
     options = webdriver.ChromeOptions()
 
@@ -116,8 +115,13 @@ def scraping_href(web):
     return df
 
 
-def scraping_detail():
-    pass
+def scraping_detail(href_list):
+
+    items = []
+    for href in href_list:
+        items.append(href["item"])
+
+    return items
 
 
 if __name__ == "__main__":
